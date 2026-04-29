@@ -1,6 +1,13 @@
-iniconfig==2.3.0
-MarkupSafe==2.0.1
-packaging==26.0
-pluggy==1.6.0
-Pygments==2.20.0
-pytest==9.0.3
+stage('Run in Docker') {
+    steps {
+        sh '''
+        docker run --rm -v $(pwd):/app -w /app python:3.11 \
+        sh -c "
+        ls &&
+        pip install -r /app/requirements.txt &&
+        python main.py &&
+        python -m pytest
+        "
+        '''
+    }
+}
