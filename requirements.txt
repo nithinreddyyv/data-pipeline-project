@@ -3,9 +3,9 @@ stage('Run in Docker') {
         sh '''
         docker run --rm -v $(pwd):/app -w /app python:3.11 \
         sh -c "
-        ls &&
+        ls -la /app &&
         pip install -r /app/requirements.txt &&
-        python main.py &&
+        python /app/main.py &&
         python -m pytest
         "
         '''
